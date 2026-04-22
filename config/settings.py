@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-PROJECT_ROOT: Path = Path(__file__).parent.parent.parent
+PROJECT_ROOT: Path = Path(__file__).parent.parent
 DATA_DIR: Path = PROJECT_ROOT / "data"
 VECTOR_DB_DIR: Path = PROJECT_ROOT / "vector_db"
 LOGS_DIR: Path = PROJECT_ROOT / "logs"
