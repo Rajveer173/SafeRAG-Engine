@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  rag-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./data:/app/data
+      - ./vector_db:/app/vector_db
+      - ./logs:/app/logs
+    depends_on:
+      - ollama
+    networks:
+      - rag-network
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - rag-network
+
+volumes:
+  ollama_data:
+
+networks:
+  rag-network:
+    driver: bridge
